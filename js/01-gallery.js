@@ -10,8 +10,20 @@ const liGallery = galleryItems
   .join("");
 
 ulGallery.innerHTML = liGallery;
-const instance = basicLightbox.create(`
-    <h1>Dynamic Content</h1>
-    <p>You can set the content of the lightbox with JS.</p>
+
+//MODAL
+const modalImages = document.querySelectorAll(".gallery__link");
+for (const modalImage of modalImages) {
+  modalImage.addEventListener("click", (e) => {
+    e.preventDefault();
+    const instance = basicLightbox.create(`
+  <img src="${modalImage}">
 `);
-console.log(instance.visible);
+    instance.show();
+    window.addEventListener("keydown", (e) => {
+      if (e.code === "Escape") {
+        instance.close();
+      }
+    });
+  });
+}
