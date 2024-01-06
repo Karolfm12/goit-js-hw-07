@@ -10,5 +10,8 @@ const liGallery = galleryItems
 ulGallery.innerHTML = liGallery;
 
 const lightBox = new SimpleLightbox(".gallery li a", {
-  /* */
+  captions: true,
+  captionSelector: "img",
+  captionType: "attr",
+  captionDelay: 250,
 });

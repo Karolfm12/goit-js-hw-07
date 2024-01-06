@@ -12,18 +12,37 @@ const liGallery = galleryItems
 ulGallery.innerHTML = liGallery;
 
 //MODAL
-const modalImages = document.querySelectorAll(".gallery__link");
-for (const modalImage of modalImages) {
-  modalImage.addEventListener("click", (e) => {
-    e.preventDefault();
+ulGallery.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target.classList.contains("gallery__image")) {
     const instance = basicLightbox.create(`
-  <img src="${modalImage}">
-`);
+      <img src="${e.target.dataset.source}">
+    `);
     instance.show();
-    window.addEventListener("keydown", (e) => {
-      if (e.code === "Escape") {
+
+    const closeOnEscape = (event) => {
+      if (event.code === "Escape") {
         instance.close();
+        document.removeEventListener("keydown", closeOnEscape);
       }
-    });
-  });
-}
+    };
+    document.addEventListener("keydown", closeOnEscape);
+  }
+});
+
+//first way
+// const modalImages = document.querySelectorAll(".gallery__link");
+// for (const modalImage of modalImages) {
+//   modalImage.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     const instance = basicLightbox.create(`
+//   <img src="${modalImage}">
+// `);
+//     instance.show();
+//     window.addEventListener("keydown", (e) => {
+//       if (e.code === "Escape") {
+//         instance.close();
+//       }
+//     });
+//   });
+// }
