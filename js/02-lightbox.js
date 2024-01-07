@@ -13,5 +13,6 @@ const lightBox = new SimpleLightbox(".gallery li a", {
   captions: true,
   captionSelector: "img",
   captionType: "attr",
+  captionsData: "alt",
   captionDelay: 250,
 });
